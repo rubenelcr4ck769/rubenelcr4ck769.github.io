@@ -2,17 +2,18 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
 <title>LOVE ALBUM</title>
 
 <style>
 :root{
     --bg1:#1a0009;
     --bg2:#000000;
-    --card:#11a0a0f;
     --accent:#ff4d6d;
     --muted:#ffb3c1;
 }
+
 *{box-sizing:border-box;}
 body{
     margin:0;
@@ -21,124 +22,125 @@ body{
     color:#ffe6ea;
     overflow-x:hidden;
 }
+
 .container{
+    width:100%;
     max-width:1100px;
     margin:auto;
-    padding:20px;
+    padding:15px;
 }
+
 h1{
     text-align:center;
-    margin-bottom:10px;
-    font-size:2.5rem;
+    margin-bottom:5px;
+    font-size:2.1rem;
     color:var(--accent);
 }
+
 .subtitle{
     text-align:center;
+    font-size:1rem;
     color:var(--muted);
-    margin-bottom:25px;
-    font-size:1.1rem;
+    margin-bottom:20px;
 }
+
 .card{
-    background:rgba(255,0,50,0.10);
-    padding:16px;
-    border-radius:12px;
+    background:rgba(255,255,255,0.06);
+    padding:15px;
+    border-radius:16px;
     margin-bottom:20px;
     border:1px solid rgba(255,0,70,0.2);
-    backdrop-filter:blur(4px);
+    backdrop-filter:blur(5px);
 }
+
 .gallery{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:15px;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:10px;
 }
+
 .gallery-item{
-    transition: transform .4s ease, box-shadow .5s ease;
+    transition:.4s;
 }
+
 .gallery-item:hover{
-    transform:scale(1.05) rotate(1deg);
-    box-shadow:0 0 30px #ff4d6d;
+    transform:scale(1.05);
 }
+
 .gallery img,
 .gallery video{
     width:100%;
-    height:250px;
+    height:180px;
     object-fit:cover;
     border-radius:12px;
 }
+
+@media (min-width:600px){
+    .gallery{
+        grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    }
+    .gallery img,.gallery video{
+        height:230px;
+    }
+}
+
+@media (min-width:900px){
+    .gallery img,.gallery video{
+        height:260px;
+    }
+}
+
 #lightbox{
     position:fixed;
     inset:0;
-    background:#000c;
+    background:#000a;
     display:none;
     justify-content:center;
     align-items:center;
+    padding:10px;
     z-index:1000;
 }
 #lightbox img,#lightbox video{
-    max-width:90%;
-    max-height:90%;
-    border-radius:12px;
+    width:100%;
+    max-width:900px;
+    max-height:80vh;
+    border-radius:14px;
     box-shadow:0 0 25px var(--accent);
 }
-.fade {
-    animation: fadeIn 1s ease forwards;
-    opacity: 0;
+
+#slideshowBtn{
+    width:100%;
+    padding:12px;
+    font-size:1.1rem;
+    background:#ff4d6d88;
+    border:1px solid var(--accent);
+    border-radius:10px;
+    cursor:pointer;
+    color:white;
 }
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-}
-.slide-transition {
-    animation: fadeSlide 1s ease forwards;
-}
-@keyframes fadeSlide {
-    0% { opacity: 0; transform: scale(0.98); }
-    100% { opacity: 1; transform: scale(1); }
-}
-.romantic-box{
-    margin:20px 0;
-}
+
 .romantic-btn{
     background:#ff4d6d55;
     border:1px solid var(--accent);
     color:white;
-    padding:10px 15px;
+    padding:10px;
+    font-size:1rem;
     border-radius:8px;
-    cursor:pointer;
+    width:100%;
 }
 #romanticText{
     display:none;
     margin-top:10px;
     padding:15px;
     border-left:3px solid var(--accent);
-    background:#0003;
-    border-radius:6px;
 }
 #visualizer{
     width:100%;
-    height:60px;
-    background:#0002;
+    height:55px;
+    background:#0003;
     border-radius:8px;
-    margin-top:10px;
 }
-.heart{
-    position:fixed;
-    color:#ff4d6d;
-    font-size:20px;
-    animation:float 4s linear infinite;
-    pointer-events:none;
-    opacity:0.8;
-}
-@keyframes float{
-    0%{
-        transform:translateY(0) translateX(0) scale(0.7);
-        opacity:1;
-    }
-    100%{
-        transform:translateY(-300px) translateX(40px) scale(1.8);
-        opacity:0;
-    }
-}
+
 #passwordScreen{
     position:fixed;
     inset:0;
@@ -150,36 +152,45 @@ h1{
     z-index:2000;
     color:white;
 }
+
 .pw-box{
     background:#222;
-    padding:30px;
+    padding:25px;
     border-radius:12px;
     text-align:center;
-    border:1px solid #ff4d6d;
+    border:1px solid var(--accent);
+    width:85%;
+    max-width:320px;
 }
+
 .pw-box input{
-    padding:8px;
-    width:200px;
+    width:100%;
+    padding:10px;
     margin-top:10px;
     border-radius:6px;
 }
+
 .pw-box button{
     margin-top:15px;
-    padding:10px 15px;
-    background:#ff4d6d;
-    color:white;
+    width:100%;
+    padding:10px;
+    background:var(--accent);
     border:none;
-    cursor:pointer;
-    border-radius:6px;
-}
-#slideshowBtn{
-    background:#ff4d6d90;
-    border:1px solid var(--accent);
-    padding:10px 15px;
-    border-radius:8px;
     color:white;
-    cursor:pointer;
-    margin-bottom:12px;
+    border-radius:6px;
+    font-size:1rem;
+}
+
+.heart{
+    position:fixed;
+    color:#ff4d6d;
+    animation:float 4s linear infinite;
+    pointer-events:none;
+    opacity:0.8;
+}
+@keyframes float{
+    0%{transform:translateY(0) scale(.7);opacity:1;}
+    100%{transform:translateY(-250px) scale(1.6);opacity:0;}
 }
 </style>
 </head>
@@ -196,17 +207,16 @@ h1{
 
 <div class="container">
 
-    <h1>LOVE ALBUM ❤️🐧🐧</h1>
+    <h1>LOVE ALBUM ❤️🐧</h1>
     <p class="subtitle">01-09-2025</p>
 
-    <div class="card romantic-box">
+    <div class="card">
         <button class="romantic-btn" onclick="toggleRomantic()">💌 cartita</button>
         <div id="romanticText">
             Desde el primer día que llegaste a mi vida,  
-            todo tuvo más color, más magia y más sentido.  
-            Este álbum es solo un pequeño reflejo  
-            del enorme amor que siento por ti  
-            ❤️🌹🐧
+            todo tuvo más color y magia.  
+            Este álbum es un pequeño reflejo 
+            del gran amor que siento por ti. ❤️🐧🌹
         </div>
     </div>
 
@@ -222,13 +232,13 @@ h1{
         <div id="gallery" class="gallery"></div>
     </div>
 
-    <footer>Fotos desde <code>/fotos</code> • Música desde <code>/musica</code></footer>
 </div>
 
 <div id="lightbox" onclick="closeLightbox()"></div>
 
 <script>
-
+const photoFolder = "fotos/";
+const musicFolder = "musica/";
 
 const mediaFiles = [
     "1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg",
@@ -256,7 +266,8 @@ const gallery = document.getElementById("gallery");
 mediaFiles.forEach(file=>{
     const item=document.createElement("div");
     item.className="gallery-item";
-    const ext=file.split(".").pop();
+    const ext=file.split(".").pop().toLowerCase();
+
     if(["jpg","jpeg","png"].includes(ext)){
         const img=document.createElement("img");
         img.src=photoFolder+file;
@@ -277,15 +288,13 @@ function openLightbox(type, src){
     lb.innerHTML = "";
     lb.style.display = "flex";
     let element;
-    if(type === "img"){
-        element = document.createElement("img");
-    } else {
+    if(type === "img"){ element = document.createElement("img"); }
+    else{
         element = document.createElement("video");
         element.controls = true;
         element.autoplay = true;
     }
     element.src = src;
-    element.classList.add("fade");
     lb.appendChild(element);
 }
 
@@ -293,43 +302,44 @@ function closeLightbox(){
     document.getElementById("lightbox").style.display="none";
 }
 
-let slideshowInterval = null;
-let slideshowIndex = 0;
-let slideshowPlaying = false;
+let slideshowInterval=null;
+let slideshowIndex=0;
+let slideshowPlaying=false;
 
 function toggleSlideshow(){
-    const btn = document.getElementById("slideshowBtn");
+    const btn=document.getElementById("slideshowBtn");
     if(!slideshowPlaying){
-        btn.textContent = "⏸ Pausar fotos";
+        btn.textContent="⏸ Pausar fotos";
         startSlideshow();
-    } else {
-        btn.textContent = "▶ Reproducir fotos";
+    }else{
+        btn.textContent="▶ Reproducir fotos";
         stopSlideshow();
     }
-    slideshowPlaying = !slideshowPlaying;
+    slideshowPlaying=!slideshowPlaying;
 }
 
 function startSlideshow(){
-    slideshowInterval = setInterval(()=>{
-        const file = mediaFiles[slideshowIndex];
-        const ext = file.split(".").pop().toLowerCase();
-        const src = photoFolder + file;
-        const lb = document.getElementById("lightbox");
-        lb.innerHTML = "";
-        lb.style.display = "flex";
+    slideshowInterval=setInterval(()=>{
+        const file=mediaFiles[slideshowIndex];
+        const ext=file.split(".").pop();
+        const src=photoFolder+file;
+        const lb=document.getElementById("lightbox");
+        lb.innerHTML="";
+        lb.style.display="flex";
+
         let element;
         if(["jpg","jpeg","png"].includes(ext)){
-            element = document.createElement("img");
+            element=document.createElement("img");
         } else {
-            element = document.createElement("video");
-            element.controls = true;
-            element.autoplay = true;
+            element=document.createElement("video");
+            element.controls=true;
+            element.autoplay=true;
         }
-        element.src = src;
-        element.classList.add("slide-transition");
+        element.src=src;
         lb.appendChild(element);
-        slideshowIndex = (slideshowIndex + 1) % mediaFiles.length;
-    }, 3000);
+
+        slideshowIndex=(slideshowIndex+1)%mediaFiles.length;
+    },2500);
 }
 
 function stopSlideshow(){
@@ -341,14 +351,15 @@ function toggleRomantic(){
     box.style.display = box.style.display==="block" ? "none" : "block";
 }
 
-const player = document.getElementById("player");
-let index = 0;
+const player=document.getElementById("player");
+let index=0;
+player.src = musicFolder + music[0];
+
 function nextSong(){
     index = (index+1) % music.length;
     player.src = musicFolder + music[index];
     player.play();
 }
-player.src = musicFolder + music[0];
 player.addEventListener("ended",nextSong);
 
 const canvas=document.getElementById("visualizer");
@@ -373,15 +384,17 @@ let data=new Uint8Array(analyser.frequencyBinCount);
 function visualize(){
     requestAnimationFrame(visualize);
     analyser.getByteFrequencyData(data);
+
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    let barWidth = canvas.width/data.length;
+    let barWidth=canvas.width/data.length;
+
     for(let i=0;i<data.length;i++){
         let h=data[i];
         ctx.fillStyle="pink";
         ctx.fillRect(i*barWidth,canvas.height-h,barWidth,h);
     }
 }
-player.onplay = ()=>audioCtx.resume();
+player.onplay=()=>audioCtx.resume();
 visualize();
 
 setInterval(()=>{
@@ -390,11 +403,12 @@ setInterval(()=>{
     heart.textContent="💖🐧";
     heart.style.left=Math.random()*100+"vw";
     heart.style.bottom="0px";
-    heart.style.fontSize=(20+Math.random()*20)+"px";
+    heart.style.fontSize=(18+Math.random()*18)+"px";
     document.body.appendChild(heart);
     setTimeout(()=>heart.remove(),4000);
-},500);
+},600);
 </script>
 
 </body>
 </html>
+
